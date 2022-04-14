@@ -103,7 +103,7 @@ for epoch in range(max_epoch):
 
     # 每个epoch，记录梯度，权值
     for name, layer in net.named_parameters():
-        writer.add_histogram(name + '_grad', layer.grad.cpu().data.numpy(), epoch)
-        writer.add_histogram(name + '_data', layer.cpu().data.numpy(), epoch)
+        writer.add_histogram(f'{name}_grad', layer.grad.cpu().data.numpy(), epoch)
+        writer.add_histogram(f'{name}_data', layer.cpu().data.numpy(), epoch)
 
 print('Finished Training')

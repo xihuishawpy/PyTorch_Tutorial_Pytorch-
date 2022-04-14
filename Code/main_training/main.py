@@ -154,8 +154,8 @@ for epoch in range(max_epoch):
 
     # 每个epoch，记录梯度，权值
     for name, layer in net.named_parameters():
-        writer.add_histogram(name + '_grad', layer.grad.cpu().data.numpy(), epoch)
-        writer.add_histogram(name + '_data', layer.cpu().data.numpy(), epoch)
+        writer.add_histogram(f'{name}_grad', layer.grad.cpu().data.numpy(), epoch)
+        writer.add_histogram(f'{name}_data', layer.cpu().data.numpy(), epoch)
 
     # ------------------------------------ 观察模型在验证集上的表现 ------------------------------------
     if epoch % 2 == 0:
@@ -163,8 +163,7 @@ for epoch in range(max_epoch):
         cls_num = len(classes_name)
         conf_mat = np.zeros([cls_num, cls_num])  # 混淆矩阵
         net.eval()
-        for i, data in enumerate(valid_loader):
-
+        for data in valid_loader:
             # 获取图片和标签
             images, labels = data
             images, labels = Variable(images), Variable(labels)

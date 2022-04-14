@@ -47,4 +47,6 @@ if __name__ == '__main__':
                 out_path = os.path.join(out_dir, os.path.split(imgs_list[i])[-1])
                 shutil.copy(imgs_list[i], out_path)
 
-            print('Class:{}, train:{}, valid:{}, test:{}'.format(sDir, train_point, valid_point-train_point, imgs_num-valid_point))
+            print(
+                f'Class:{sDir}, train:{train_point}, valid:{valid_point - train_point}, test:{imgs_num - valid_point}'
+            )

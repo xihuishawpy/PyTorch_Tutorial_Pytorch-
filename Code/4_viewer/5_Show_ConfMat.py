@@ -30,17 +30,17 @@ def show_confMat(confusion_mat, classes_name, set_name, out_dir):
     plt.yticks(xlocations, classes_name)
     plt.xlabel('Predict label')
     plt.ylabel('True label')
-    plt.title('Confusion_Matrix_' + set_name)
+    plt.title(f'Confusion_Matrix_{set_name}')
 
     # 打印数字
     for i in range(confusion_mat_N.shape[0]):
         for j in range(confusion_mat_N.shape[1]):
             plt.text(x=j, y=i, s=int(confusion_mat[i, j]), va='center', ha='center', color='red', fontsize=10)
     # 保存
-    plt.savefig(os.path.join(out_dir, 'Confusion_Matrix_' + set_name + '.png'))
+    plt.savefig(os.path.join(out_dir, f'Confusion_Matrix_{set_name}.png'))
     plt.close()
 
 if __name__ == '__main__':
 
-    print('QQ group: {} or {}, password: {}'.format(671103375, 773031536, 2018))
+    print('QQ group: 671103375 or 773031536, password: 2018')
 

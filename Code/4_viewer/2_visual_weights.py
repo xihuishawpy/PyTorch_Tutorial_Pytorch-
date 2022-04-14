@@ -59,11 +59,11 @@ for k, v in params.items():
             print(k, v.size(), j)
             kernel_j = v[j, :, :, :].unsqueeze(1)       # 压缩维度，为make_grid制作输入
             kernel_grid = vutils.make_grid(kernel_j, normalize=True, scale_each=True, nrow=c_int)   # 1*输入通道数, w, h
-            writer.add_image(k+'_split_in_channel', kernel_grid, global_step=j)     # j 表示feature map数
+            writer.add_image(f'{k}_split_in_channel', kernel_grid, global_step=j)
 
         # 将一个卷积层的卷积核绘制在一起，每一行是一个feature map的卷积核
         k_w, k_h = v.size()[-1], v.size()[-2]
         kernel_all = v.view(-1, 1, k_w, k_h)
         kernel_grid = vutils.make_grid(kernel_all, normalize=True, scale_each=True, nrow=c_int)  # 1*输入通道数, w, h
-        writer.add_image(k + '_all', kernel_grid, global_step=666)
+        writer.add_image(f'{k}_all', kernel_grid, global_step=666)
 writer.close()

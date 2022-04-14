@@ -54,7 +54,7 @@ for name, layer in net._modules.items():
         # 绘制feature maps
         x1 = x.transpose(0, 1)  # C，B, H, W  ---> B，C, H, W
         img_grid = vutils.make_grid(x1, normalize=True, scale_each=True, nrow=2)  # B，C, H, W
-        writer.add_image(vis_layer + '_feature_maps', img_grid, global_step=666)
+        writer.add_image(f'{vis_layer}_feature_maps', img_grid, global_step=666)
 
         # 绘制原始图像
         img_raw = normalize_invert(img, normMean, normStd)  # 图像去标准化

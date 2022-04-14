@@ -59,8 +59,7 @@ def img_preprocess(img_in):
         transforms.ToTensor(),
         transforms.Normalize([0.4948052, 0.48568845, 0.44682974], [0.24580306, 0.24236229, 0.2603115])
     ])
-    img_input = img_transform(img, transform)
-    return img_input
+    return img_transform(img, transform)
 
 
 def backward_hook(module, grad_in, grad_out):
@@ -92,17 +91,12 @@ def comp_class_vec(ouput_vec, index=None):
     :param index: int，指定类别
     :return: tensor
     """
-    if not index:
-        index = np.argmax(ouput_vec.cpu().data.numpy())
-    else:
-        index = np.array(index)
+    index = np.array(index) if index else np.argmax(ouput_vec.cpu().data.numpy())
     index = index[np.newaxis, np.newaxis]
     index = torch.from_numpy(index)
     one_hot = torch.zeros(1, 10).scatter_(1, index, 1)
     one_hot.requires_grad = True
-    class_vec = torch.sum(one_hot * output)  # one_hot = 11.8605
-
-    return class_vec
+    return torch.sum(one_hot * output)
 
 
 def gen_cam(feature_map, grads):
@@ -135,8 +129,8 @@ if __name__ == '__main__':
     output_dir = os.path.join(BASE_DIR, "..", "..", "Result", "backward_hook_cam")
 
     classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
-    fmap_block = list()
-    grad_block = list()
+    fmap_block = []
+    grad_block = []
 
     # 图片读取；网络加载
     img = cv2.imread(path_img, 1)  # H*W*C
@@ -151,7 +145,7 @@ if __name__ == '__main__':
     # forward
     output = net(img_input)
     idx = np.argmax(output.cpu().data.numpy())
-    print("predict: {}".format(classes[idx]))
+    print(f"predict: {classes[idx]}")
 
     # backward
     net.zero_grad()

@@ -44,7 +44,7 @@ for i in range(3):
 means.reverse() # BGR --> RGB
 stdevs.reverse()
 
-print("normMean = {}".format(means))
-print("normStd = {}".format(stdevs))
-print('transforms.Normalize(normMean = {}, normStd = {})'.format(means, stdevs))
+print(f"normMean = {means}")
+print(f"normStd = {stdevs}")
+print(f'transforms.Normalize(normMean = {means}, normStd = {stdevs})')
 
