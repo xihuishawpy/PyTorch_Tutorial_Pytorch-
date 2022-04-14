@@ -127,14 +127,14 @@ def show_confMat(confusion_mat, classes, set_name, out_dir):
     plt.yticks(xlocations, list(classes))
     plt.xlabel('Predict label')
     plt.ylabel('True label')
-    plt.title('Confusion_Matrix_' + set_name)
+    plt.title(f'Confusion_Matrix_{set_name}')
 
     # 打印数字
     for i in range(confusion_mat_N.shape[0]):
         for j in range(confusion_mat_N.shape[1]):
             plt.text(x=j, y=i, s=int(confusion_mat[i, j]), va='center', ha='center', color='red', fontsize=10)
     # 保存
-    plt.savefig(os.path.join(out_dir, 'Confusion_Matrix' + set_name + '.png'))
+    plt.savefig(os.path.join(out_dir, f'Confusion_Matrix{set_name}.png'))
     plt.close()
 
 

@@ -169,14 +169,13 @@ for epoch in range(max_epoch):
             loss_sigma = 0.0
             print("Training: Epoch[{:0>3}/{:0>3}] Iteration[{:0>3}/{:0>3}] Loss: {:.4f} Acc:{:.2%}".format(
                 epoch + 1, max_epoch, i + 1, len(train_loader), loss_avg, correct / total))
-            print('参数组1的学习率:{}, 参数组2的学习率:{}'.format(scheduler.get_lr()[0], scheduler.get_lr()[1]))
+            print(f'参数组1的学习率:{scheduler.get_lr()[0]}, 参数组2的学习率:{scheduler.get_lr()[1]}')
     # ------------------------------------ 观察模型在验证集上的表现 ------------------------------------
     loss_sigma = 0.0
     cls_num = len(classes_name)
     conf_mat = np.zeros([cls_num, cls_num])  # 混淆矩阵
     net.eval()
-    for i, data in enumerate(valid_loader):
-
+    for data in valid_loader:
         # 获取图片和标签
         images, labels = data
         images, labels = Variable(images), Variable(labels)
